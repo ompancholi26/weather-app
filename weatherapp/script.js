@@ -3,6 +3,8 @@ const API_URL = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q
 const searchBox = document.querySelector(".search input");
 const searchBtn = document.querySelector(".search button");
 const weatherIcon = document.querySelector(".weather-icon");
+const weatherDiv = document.querySelector(".weather");
+const errorDiv = document.querySelector(".error");
 
 async function checkWeather(city) {
     if (!city.trim()) {
@@ -14,8 +16,8 @@ async function checkWeather(city) {
         const response = await fetch(API_URL + encodeURIComponent(city) + `&appid=${API_KEY}`);
         
         if (response.status == 404) {
-            document.querySelector(".error").style.display = "block";
-            document.querySelector(".weather").style.display = "none";
+            errorDiv.classList.add("show");
+            weatherDiv.classList.remove("show");
         } else {
             const data = await response.json();
 
@@ -39,13 +41,17 @@ async function checkWeather(city) {
             else if (data.weather[0].main == "Mist") {
                 weatherIcon.src = "mist.png";
             }
-            document.querySelector(".weather").style.display = "block";
-            document.querySelector(".error").style.display = "none";
+            else if (data.weather[0].main == "Snow") {
+                weatherIcon.src = "snow.png";
+            }
+            
+            weatherDiv.classList.add("show");
+            errorDiv.classList.remove("show");
         }
     } catch (error) {
         console.error("Error fetching weather:", error);
-        document.querySelector(".error").style.display = "block";
-        document.querySelector(".weather").style.display = "none";
+        errorDiv.classList.add("show");
+        weatherDiv.classList.remove("show");
     }
 }
 
