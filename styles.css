@@ -1,0 +1,19 @@
+.navbar{
+    background-color: rgb(189, 189, 17);
+}
+
+#city-input{
+    background-color: rgb(230, 238, 113);
+}
+#search-button{
+    background-color: greenyellow;
+}
+.h1{
+   border: 0lvw solid black;
+}
+#Get-Location-button{
+    background-color: rgb(153, 224, 224);
+}
+#city-Name{
+    background-color: violet;
+}
